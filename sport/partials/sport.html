@@ -1,11 +1,12 @@
 <?php
+// Tronçonnage du texte pour éviter les trop grandes différences de hauteur des cartes
 function truncate($text, $length = 150) {
     if (strlen($text) > $length) {
         $text = substr($text, 0, $length) . '...';
     }
     return $text;
 }
-
+// formatage de la date
 function formatDate($date) {
       return date('d M Y H:i', strtotime($date));
   }
@@ -18,8 +19,8 @@ function formatDate($date) {
                   <div class="card equal-height-card">
                       <img class="card-img-top" src="<?php echo htmlspecialchars($item->enclosure['url']); ?>" alt="<?php echo htmlspecialchars($item->title); ?>">
                       <div class="card-body">
-                          <h5 class="card-title"><?php echo htmlspecialchars(truncate($item->title, 50)); ?></h5>
-                          <p class="card-text"><?php echo htmlspecialchars(truncate(strip_tags($item->description), 70)); ?></p>
+                          <h5 class="card-title"><?php echo htmlspecialchars(truncate($item->title, 50)); ?></h5> <!-- appel à la méthode truncate -->
+                          <p class="card-text"><?php echo htmlspecialchars(truncate(strip_tags($item->description), 70)); ?></p> <!-- appel à la méthode truncate -->
                           <a href="<?php echo htmlspecialchars($item->guid); ?>" class="btn btn-primary">Guide sur l'Equipe</a>
                           <p class="card-date"><?php echo htmlspecialchars(formatDate($item->pubDate)); ?></p>
                       </div>
