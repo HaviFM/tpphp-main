@@ -3,10 +3,25 @@ class DAO_Xml implements DAO
 {
       function requete($urlSport){
             $rssContent = file_get_contents($urlSport);
-            return  simplexml_load_string($rssContent);
+          /*   return  simplexml_load_string($rssContent,'SimpleXMLElement', LIBXML_NOCDATA); */
+          return $this->xmlToArray(simplexml_load_string($rssContent,'SimpleXMLElement', LIBXML_NOCDATA));
       }
-      function requeteWidget($urlSport){
-            $rssWidget = file_get_contents($urlSport);
-            return  simplexml_load_string($rssWidget);
+      
+      function xmlstring2array($string)
+      {
+          $xml   = simplexml_load_string($string, 'SimpleXMLElement', LIBXML_NOCDATA);
+      
+          $array = json_decode(json_encode($xml), TRUE);
+      
+          return $array;
       }
+      
+      function xmlToArray($xmlObject, $out = array()) {
+            foreach ((array) $xmlObject as $index => $node) {
+                  $out[$index] = (is_object($node) || is_array($node)) ? $this->xmlToArray($node) : $node;
+            }
+            return $out;
+      }
+
+
 }

@@ -18,16 +18,20 @@ class CtrlSport {
         
         $data = $this->model->selectSport($sport);
         $this->vue->afficherSport($data);
-        $this->getWidget($sport);
+       
         
-      }
+      };
       
-}
-function getWidget($sport){
-$sport = $_GET['sport'];
-$widgetData = $this->model->selectWidgetSport($sport);
- 
-}
+    }
+    function apiSport(){
+      $data = $this->model->selectSport("");
+    $widget =[ $data['channel']['item'][0],$data['channel']['item'][1],$data['channel']['item'][2]];
+   
+   // var_dump($widget);
+  $json = json_encode($widget);
+  echo $json;  
+  }
+
 }
 
 

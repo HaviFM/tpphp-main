@@ -58,35 +58,23 @@
 
 
                 <?php endif ?>
-                <div class="card text-body" style=" border-radius: 35px;">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <h6 class="flex-grow-1"><?= Session::getSport(date("G"))['ville'] ?></h6>
-                            <h6><?= date("H:i") ?></h6>
-                        </div>
-
-                        <div class="d-flex flex-column text-center mt-5 mb-4">
-                            <h6 class="display-4 mb-0 font-weight-bold"> <?= Session::getMeteo(date("G"))['heure']['temp'] ?>°C </h6>
-                            <span class="small" style="color: #868B94"><?= Session::getMeteo(date("G"))['heure']['condition'] ?></span>
-                        </div>
-
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1" style="font-size: 1rem;">
-                                <div><i class="fas fa-wind fa-fw" style="color: #868B94;"></i> <span class="ms-1"> <?= Session::getMeteo(date("G"))['heure']['windspeed'] ?> Km/h
-                                    </span>
-                                </div>
-                                <div><i class="fas fa-tint fa-fw" style="color: #868B94;"></i> <span class="ms-1"> <?= Session::getMeteo(date("G"))['heure']['humidite'] ?> %
-                                    </span></div>
-                                <div><i class="fas fa-sun fa-fw" style="color: #868B94;"></i> <span class="ms-1"> <?= Session::getMeteo(date("G"))['heure']['pression'] ?> hPa
-                                    </span></div>
-                            </div>
-                            <div>
-                                <img src="<?= Session::getMeteo(date('G'))['heure']['icon'] ?>" width="50px">
-                            </div>
-                        </div>
-
-                    </div>
+                <div class="card" id="widgetSport" style="width: 18rem">
+                    <div class="card-body"></div>
                 </div>
+                
+                <script>
+                    window.onload = function(){
+                        fetch('https://td-vert.afpa-balma.fr/CtrlSport/apiSport')
+                        .then((response) => response.json())
+                        .then((json) => {  afficherWidget(json) })
+    
+                    }
+
+                    function afficherWidget(data){
+                        console.log(data);
+                        document.querySelector('#widgetSport div').innerHTML = data[0].title;
+                    }
+                </script>
             </aside>
 
         </div>

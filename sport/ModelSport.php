@@ -15,11 +15,5 @@ class ModelSport
       $array = $this->dao->requete(Conf::$urlSport . $sport);
       return $array;
     }
-    function selectWidgetSport($sport)
-    {
-      $sport ='';
-      $arrayWidget = $this->dao->requeteWidget(Conf::$urlSport . $sport);
-      var_dump($arrayWidget);
-      Session::setSport($arrayWidget);
-    }
+   
   }
