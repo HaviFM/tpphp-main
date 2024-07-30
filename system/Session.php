@@ -42,4 +42,8 @@ class Session
     {
         unset($_SESSION['meteo']);
     }
+    public static function setSport($arrayWidget) {
+        $_SESSION['sport'] = serialize($arrayWidget);
+    }
 }
+
