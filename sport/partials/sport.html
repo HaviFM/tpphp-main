@@ -19,7 +19,7 @@ function formatDate($date) {
         <div class="container">
             <div class="row">
                 <?php foreach ($data['channel']['item'] as $item): ?>
-                    <div class="col-lg-12 col-md-6 mb-4">
+                    <div class="col-lg-12 col-md-4 mb-4">
                         <div class="card equal-height-card">
                             <img class="card-img-top" src="<?php echo htmlspecialchars($item['enclosure']['@attributes']['url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
                             <div class="card-body">
@@ -43,13 +43,13 @@ function formatDate($date) {
                  <h1>Pas de Page RMC</h1>
                 <?php else : ?>
                 <?php foreach ($data2['channel']['item'] as $item): ?>
-                    <div class="col-lg-12 col-md-6 mb-4">
+                    <div class="col-lg-12 col-md-4 mb-4">
                         <div class="card equal-height-card">
                             <img class="card-img-top" src="<?php echo htmlspecialchars($item['enclosure']['@attributes']['url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo htmlspecialchars(truncate($item['title'], 50)); ?></h5>
                                 <p class="card-text"><?php echo htmlspecialchars(truncate(strip_tags($item['description']), 70)); ?></p>
-                                <a href="<?php echo htmlspecialchars($item['guid']); ?>" class="btn btn-primary">Guide RMC</a>
+                                <a href="<?php echo htmlspecialchars($item['guid']); ?>" class="btn btn-primary rmc">Guide RMC</a>
                                 <p class="card-date"><?php echo htmlspecialchars(formatDate($item['pubDate'])); ?></p>
                             </div>
                         </div>

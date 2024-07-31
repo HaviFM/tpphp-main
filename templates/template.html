@@ -16,13 +16,13 @@
 <body>
     <?php include "partials/nav.html" ?>
     <div class="container">
-        <div class="row d-flex justify-content-center py-5">
+        <div class="row py-5">
 
             <section class="col-md-8">
                 <?php include $partial ?>
             </section>
 
-            <aside class="col-md-4">
+            <aside class="col-md-4 py-5">
                 <?php if (Session::getMeteo(date("G"))) : ?>
 
                     <div class="card text-body" style=" border-radius: 35px;">
@@ -60,20 +60,61 @@
                 <?php endif ?>
                 <div class="card" id="widgetSport" style="width: 18rem">
                     <div class="card-body"></div>
+                    <button type="buttton" id="btn">Article suivant</button>
                 </div>
                 
                 <script>
                     window.onload = function(){
-                        fetch('https://td-vert.afpa-balma.fr/CtrlSport/apiSport')
+                   
+                        fetch('https://td-vert.afpa-balma.fr/CtrlSport/apiSport')               
                         .then((response) => response.json())
-                        .then((json) => {  afficherWidget(json) })
-    
-                    }
+                        .then((json) => {
+                         var data = json;
+                         afficherWidget(data);
 
-                    function afficherWidget(data){
-                        console.log(data);
-                        document.querySelector('#widgetSport div').innerHTML = data[0].title;
-                    }
+                        });
+                        var i = 0;
+                        /*
+                        .then((response) => response.json())
+                        .then((json) => { 
+                          afficherWidget(json) })
+                        articleSuivant();
+                        
+                        console.log(i);
+                        */   
+                        function remove(text) {
+                            return  text.replace(/<img[^>]*>/g,'');
+                        }
+                        function afficherWidget(data){
+                            console.log(data);
+                            console.log(data[i])
+                            
+                            if (data && data[i]){
+                            const image = data[i].enclosure["@attributes"].url;
+                            const description = remove(data[i].description);
+                            
+                            
+                            document.querySelector('#widgetSport .card-body').innerHTML =
+                            "<h5>" + data[i].title + "</h5>" +
+                            "<img src=" + image + " width='200px'>" +
+                            "<p>" + description + "</p>" +
+                            "<a href=" + data[i].guid + " class='btn btn-primary'>"  + "Guide sur l'Equipe" + "</a>" +
+                            "<p>" + data[i].pubDate + "</p>";
+                            }
+                        }
+                        function articleSuivant() {
+                            document.getElementById("btn").addEventListener("click", function() {
+                                console.log('ça marche');
+                                i = (i+1) % data.length; 
+                                console.log(i);
+                                afficherWidget(data);
+                            }
+                        )
+                        
+                        }
+                    
+                }    
+                    
                 </script>
             </aside>
 
@@ -82,3 +123,40 @@
 </body>
 
 </html>
+
+<!--   <script>
+    window.onload = function() {
+        fetch('https://td-vert.afpa-balma.fr/CtrlSport/apiSport')
+            .then((response) => response.json())
+            .then((json) => {
+                data = json;
+                afficherWidget();
+            });
+
+        let i = 0;
+        
+        function remove(text) {
+            return text.replace(/<img[^>]*>/g, '');
+        }
+
+        function afficherWidget() {
+            if (data && data[i]) {
+                const image = data[i].enclosure["@attributes"].url;
+                const description = remove(data[i].description);
+
+                document.querySelector('#widgetSport .card-body').innerHTML =
+                    "<h5>" + data[i].title + "</h5>" +
+                    "<img src='" + image + "' width='200px'>" +
+                    "<p>" + description + "</p>" +
+                    "<a href='" + data[i].guid + "' class='btn btn-primary'>Guide sur l'Equipe</a>" +
+                    "<p>" + data[i].pubDate + "</p>";
+            }
+        }
+
+        document.getElementById("btn").addEventListener("click", function() {
+            i = (i + 1) % data.length; // Assurez-vous de revenir au début de la liste
+            afficherWidget();
+        });
+    }
+</script>
+-->

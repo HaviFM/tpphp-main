@@ -10,7 +10,7 @@
 .row {
     display: flex;
     flex-wrap: wrap;
-}
+}  
 
 .equal-height-card {
     display: flex;
@@ -31,7 +31,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 450px; /* Hauteur minimale pour toutes les cartes */
+    min-height: 450px;
     height: auto; /* Hauteur automatique pour s'adapter au contenu */
 }
 
@@ -93,6 +93,10 @@
     align-self: flex-start;
 }
 
+.btn-primary.rmc {
+    background-color: #ff0000 !important;
+}
+
 .btn-primary:hover {
     background-color: #0056b3;
 }
@@ -106,8 +110,21 @@ h1 {
 
 .card-img-top {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
+    height: 250px !important; /* Définir une hauteur fixe pour toutes les images */
+ /*   object-fit: cover;  */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+}
+
+.col-md-4 {
+    flex: auto;
+    width: 33%;
+}
+
+.img {
+    object-fit: cover;
+}
+
+.py-5 {
+    display: table-cell !important;
 }
