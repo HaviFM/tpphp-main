@@ -6,7 +6,7 @@ class ViewSport
     function __construct(){
 
     }
-    function afficherSport($data){
+    function afficherSport($data,$data2){
         $partial = $this->partials . "sport.html";
         include Conf::$templates . "template.html";
     }

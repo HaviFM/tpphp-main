@@ -10,10 +10,11 @@ class ModelSport
       $this->dao = new DAO_Xml();
     }
 
-    function selectSport($sport)
+    function selectSport($url,$sport)
     {
-      $array = $this->dao->requete(Conf::$urlSport . $sport);
+      $array = $this->dao->requete($url.$sport);
       return $array;
+      
     }
    
   }

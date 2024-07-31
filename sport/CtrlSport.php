@@ -15,22 +15,26 @@ class CtrlSport {
     {
       if (isset($_GET['sport'])) {
         $sport = $_GET['sport'];
+        $data = $this->model->selectSport(Conf::$urlSport,$sport);
+        $data2 = $this->model->selectSport(Conf::$urlSport2,$sport);
         
-        $data = $this->model->selectSport($sport);
-        $this->vue->afficherSport($data);
        
-        
-      };
+          $this->vue->afficherSport($data,$data2);
+          
+       
+      }
+    
       
     }
     function apiSport(){
-      $data = $this->model->selectSport("");
+      $data = $this->model->selectSport(Conf::$urlSport, "");
     $widget =[ $data['channel']['item'][0],$data['channel']['item'][1],$data['channel']['item'][2]];
    
    // var_dump($widget);
   $json = json_encode($widget);
   echo $json;  
   }
+  
 
 }
 
