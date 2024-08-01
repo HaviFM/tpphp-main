@@ -1,0 +1,36 @@
+<?php
+// Tronçonnage du texte pour éviter les trop grandes différences de hauteur des cartes
+function truncate($text, $length = 150) {
+    if (strlen($text) > $length) {
+        $text = substr($text, 0, $length) . '...';
+    }
+    return $text;
+}
+
+// Formatage de la date
+function formatDate($date) {
+    return date('d M Y H:i', strtotime($date));
+}
+?>
+<?php var_dump($rss) ?>
+<div class="row custom-row">
+    <!-- Premier container -->
+    <div class="col-lg-6">
+        <div class="container">
+            <div class="row">
+                <?php foreach ($flux['channel']['item'] as $item): ?>
+                    <div class="col-lg-12 col-md-4 mb-4">
+                        <div class="card custom-card equal-height-card">
+                            <img class="card-img-top custom-card-img-top" src="<?php echo htmlspecialchars($item['enclosure']['@attributes']['url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
+                            <div class="card-body custom-card-body">
+                                <h5 class="card-title custom-card-title"><?php echo htmlspecialchars(truncate($item['title'], 50)); ?></h5>
+                                <p class="card-text custom-card-text"><?php echo htmlspecialchars(truncate(($item['description']), 70)); ?></p>
+                                <a href="<?php echo htmlspecialchars($item['guid']); ?>" class="btn btn-primary custom-btn-primary">Guide de l'AFUP</a>
+                                <p class="card-date custom-card-date"><?php echo htmlspecialchars(formatDate($item['pubDate'])); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
