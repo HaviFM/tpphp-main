@@ -11,7 +11,6 @@ class ModelFlux
     function selectFlux($urlFlux)
     {
       $array = $this->dao->requete($urlFlux);
-      var_dump($array);
       return $array;
       
     }

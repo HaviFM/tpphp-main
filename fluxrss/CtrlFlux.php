@@ -14,20 +14,20 @@ class CtrlFlux
   {
     if (isset($_GET['flux'])) {
       $flux = $_GET['flux'];
-        var_dump($flux);
-        if ($_GET == 'flux1') {
-      $rss = $this->model->selectFlux(Conf::$urlFlux);
-       $this->vue->afficherFlux($rss);
+       if ($flux === 'flux1') {
+       $rss = $this->model->selectFlux(Conf::$urlFlux);
       }
-    else if ($_GET == 'flux2') {
-    $rss = $this->model->selectFlux(Conf::$urlFlux2);
-    $this->vue->afficherFlux($rss);
-
-        }
-        else if ($_GET == 'flux3'){
-          $rss = $this->model->selectFlux(Conf::$urlFlux3);
-          $this->vue->afficherFlux($rss);
-        }
+      
+      else if ($flux === 'flux2') {
+        $rss2 = $this->model->selectFlux(Conf::$urlFlux2);
+        
+        
+      }
+      else if ($flux === 'flux3'){
+        $rss3 = $this->model->selectFlux(Conf::$urlFlux3);
+      }
+      $this->vue->afficherFlux($rss, $rss2, $rss3);
     }
+    
   }
 }
