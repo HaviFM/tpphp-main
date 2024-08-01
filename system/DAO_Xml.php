@@ -4,7 +4,7 @@ class DAO_Xml implements DAO
       function requete($url){
             
             $rssContent = file_get_contents($url);
-
+            $rssContent = str_replace('media:content','mediaContent',$rssContent);
           return $this->xmlToArray(simplexml_load_string($rssContent,'SimpleXMLElement', LIBXML_NOCDATA));
       }
       

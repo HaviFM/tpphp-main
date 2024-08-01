@@ -6,9 +6,13 @@ class ViewFlux
     function __construct(){
 
     }
-    function afficherFlux($rss,$rss2, $rss3){
+    function afficherFlux($rss){
         $partial = $this->partials . "flux.html";
         
+        include Conf::$templates . "template.html";
+    }
+    function afficherError(){
+        $partial = $this->partials . "error.html";
         include Conf::$templates . "template.html";
     }
 }

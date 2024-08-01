@@ -10,10 +10,11 @@ class CtrlFlux
     $this->model = new ModelFlux();
   }
 
-  function getFlux()
+  function getFlux($arg)
   {
-    if (isset($_GET['flux'])) {
-      $flux = $_GET['flux'];
+      if(isset(Conf::$flux[$arg])){
+      $rss = $this->model->selectFlux(Conf::$flux[$arg]);
+/* 
        if ($flux === 'flux1') {
        $rss = $this->model->selectFlux(Conf::$urlFlux);
       }
@@ -25,9 +26,12 @@ class CtrlFlux
       }
       else if ($flux === 'flux3'){
         $rss3 = $this->model->selectFlux(Conf::$urlFlux3);
-      }
-      $this->vue->afficherFlux($rss, $rss2, $rss3);
+      } */
+      $this->vue->afficherFlux($rss);
     }
+    else{
+      $this->vue->afficherError();
+    }
+  }
     
   }
-}
