@@ -24,55 +24,21 @@ function formatDate($date) {
                 <?php foreach ($rss['channel']['item'] as $item): ?>
                     <div class="col-lg-12 col-md-4 mb-4">
                         <div class="card custom-card equal-height-card">
+                            
+                        <?php    $imageUrl = isset($item['mediaContent']['@attributes']['url']) ? $item['mediaContent']['@attributes']['url'] : ''; ?>
                            <!-- <img class="card-img-top custom-card-img-top" src="<?php echo htmlspecialchars($item['enclosure']['@attributes']['url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">-->
-                            <div class="card-body custom-card-body">
+                           <?php if ($imageUrl): ?>
+                           <img class="card-img-top custom-card-img-top" src="<?php echo htmlspecialchars($imageUrl); ?>" alt="<?= htmlspecialchars($item['title']); ?>"> 
+                           <?php endif; ?>
+                           <div class="card-body custom-card-body">
                                 <h5 class="card-title custom-card-title"><?= htmlspecialchars(truncate($item['title'], 50)); ?></h5>
                                 <p class="card-text custom-card-text"><?= truncate(strip_tags($item['description']), 150); ?></p>
-                                <a href="<?= htmlspecialchars($item['guid']); ?>" class="btn btn-primary custom-btn-primary">Guide de l'AFUP</a>
+                                <a href="<?= htmlspecialchars($item['guid']); ?>" class="btn btn-primary custom-btn-primary">Guide</a>
                                 <p class="card-date custom-card-date"><?= htmlspecialchars(formatDate($item['pubDate'])); ?></p>
                             </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
-            </div>
-        </div>
-    </div>
-  <!-- Deuxième container -->
-    <div class="col-lg-12">
-        <div class="container">
-            <div class="row">
-                <?php foreach ($rss2['channel']['item'] as $item): ?>
-                    <div class="col-lg-12 col-md-4 mb-4">
-                        <div class="card custom-card equal-height-card">
-                           <!-- <img class="card-img-top custom-card-img-top" src="<?php echo htmlspecialchars($item['enclosure']['@attributes']['url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">-->
-                            <div class="card-body custom-card-body">
-                                <h5 class="card-title custom-card-title"><?php echo htmlspecialchars(truncate($item['title'], 50)); ?></h5>
-                                <p class="card-text custom-card-text"><?php echo htmlspecialchars(truncate(strip_tags($item['description']), 150)); ?></p>
-                                <a href="<?php echo htmlspecialchars($item['guid']); ?>" class="btn btn-primary custom-btn-primary rmc">Guide Jeu vidéo</a>
-                                <p class="card-date custom-card-date"><?php echo htmlspecialchars(formatDate($item['pubDate'])); ?></p>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>     
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-12">
-        <div class="container">
-            <div class="row">
-                <?php foreach ($rss3['channel']['item'] as $item): ?>
-                    <div class="col-lg-12 col-md-4 mb-4">
-                        <div class="card custom-card equal-height-card">
-                           <!-- <img class="card-img-top custom-card-img-top" src="<?php echo htmlspecialchars($item['enclosure']['@attributes']['url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">-->
-                            <div class="card-body custom-card-body">
-                                <h5 class="card-title custom-card-title"><?php echo htmlspecialchars(truncate($item['title'], 50)); ?></h5>
-                                <p class="card-text custom-card-text"><?php echo htmlspecialchars(truncate(strip_tags($item['description']), 150)); ?></p>
-                                <a href="<?php echo htmlspecialchars($item['guid']); ?>" class="btn btn-primary custom-btn-primary rmc">Guide Magic</a>
-                                <p class="card-date custom-card-date"><?php echo htmlspecialchars(formatDate($item['pubDate'])); ?></p>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>     
             </div>
         </div>
     </div>

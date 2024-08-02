@@ -24,5 +24,4 @@ class DAO_Xml implements DAO
             return $out;
       }
 
-
 }
